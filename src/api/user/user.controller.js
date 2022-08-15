@@ -8,7 +8,7 @@ const userById = async (req, res, next) => {
     try {
       const { id } = req.params;
       if (id != req.user.id) return next(setError(403, "Forbidden"));
-      const user = await User.findById(id);
+      const user = await User.findById(id).populate("ticket");
       if (!user) return next(setError(404, "User not found"));
       return res.status(200).json(user);
     } catch (error) {
@@ -52,9 +52,6 @@ const login = async (req, res, next )=> {
 
 
 }
-
-
-
 const update = async (req, res, next) => {
     try {
       const { id } = req.params;

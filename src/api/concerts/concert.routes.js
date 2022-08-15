@@ -13,7 +13,7 @@ const concertCreateRateLimit = rateLimit({
 
 ConcertRoutes.get('/', [authorize], getAll);
 ConcertRoutes.get('/:id', [authorize], getById);
-ConcertRoutes.post('/', [authorize], upload.single("ticket"), create);
+ConcertRoutes.post('/', [authorize, concertCreateRateLimit], upload.single("ticket"), create);
 ConcertRoutes.patch('/:id', [authorize], upload.single("ticket"), update);
 ConcertRoutes.delete('/:id', [authorize], remove);
 
